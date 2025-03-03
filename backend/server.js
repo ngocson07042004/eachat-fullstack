@@ -11,11 +11,7 @@ app.use(cors())
 
 //Server
 const server = http.createServer(app)
-const io = new Server(server, {
-    cors:{
-        origin: "*"
-    }
-})
+const io = new Server(server, {cors:{ origin: "*"}})
 
 //Khai bao router
 app.use("/", router)
