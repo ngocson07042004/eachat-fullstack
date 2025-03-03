@@ -1,0 +1,17 @@
+main{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+main>.no-chat{
+    width: calc(69% - 10px);
+    height: 96vh;
+    border-radius: 10px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
