@@ -5,7 +5,7 @@ import './cssPages/login.css'
 
 export const setLogin = {
     user: "",
-    state: false
+    state: false,
 }
 
 function Login(){

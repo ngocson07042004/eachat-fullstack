@@ -5,6 +5,15 @@ import { setLogin } from '../pages/Login'
 import HeaderContent from './HeaderContent'
 import './css/default.css'
 
+const hashCode = (length) =>{
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let result = "";
+    for (let i = 0; i < length; i++) {
+        const index = Math.floor(Math.random() * characters.length);
+        result += characters[index];
+    }
+    return result
+}
 
 function ChatList(){
     const [user, setUser] = useState([])
@@ -14,7 +23,7 @@ function ChatList(){
         .then(res => setUser(res.data.filter(item => item.Username !== setLogin.user)))
         .catch(err => console.log(err))
     }, [])
-    
+
     return(
         <div className="container-chat container">
             <HeaderContent name="Đoạn chat"/>
@@ -22,7 +31,7 @@ function ChatList(){
                 <ul className="chats">
                     {user.map((item, index) =>(
                         <li key={index}>
-                            <Link to={`/chat/${index}`}
+                            <Link to={`/chat/${hashCode(25)}`}
                             state={{
                                 user: item.Username,
                                 Name: `${item.LastName} ${item.Name}`,

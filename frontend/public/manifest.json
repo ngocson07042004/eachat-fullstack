@@ -1,6 +1,6 @@
 {
   "short_name": "Website",
-  "name": "Website bán trái cây",
+  "name": "EaChat",
   "icons": [
     {
       "src": "logo-title.png",
@@ -9,7 +9,7 @@
     },
     {
       "src": "logo-title.png",
-      "type": "/.src/image/png",
+      "type": "./src/image/png",
       "sizes": "192x192"
     },
     {

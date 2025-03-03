@@ -35,7 +35,7 @@ function ChatWindow(){
 
     return () => {
       socket.off("receiver"); // Dọn dẹp khi component unmount
-    };
+    }
   }, [username, roomName])
     
     const getMessage = (e) =>{
