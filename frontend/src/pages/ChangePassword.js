@@ -1,6 +1,6 @@
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useRef, useState } from 'react'
-import axios from 'axios'
+import useAxios from '../hooks/useAxios'
 import './cssPages/changePassword.css'
 
 function ChangePassword(){
@@ -26,22 +26,26 @@ function ChangePassword(){
         else setShow2(false)
     }
 
-    const handlerSubmit = () =>{
+    const { data, isLoading } = useAxios(
+        "http://localhost:8081/change-password",
+        "post",
+        {password, corfimPassword, username}
+    )
+
+    const handlerSubmit = (e) =>{
+        e.preventDefault()
+
         if(username !== "" && password === corfimPassword){
-            axios.post('http://localhost:8081/change-password', {password, corfimPassword, username})
-            .then(res => {
-                if(res.data === "Error"){         
-                    alert("Đổi mật khẩu thất bại!")
-                    setUsername("")
-                    setPassword("")
-                    setCorfimPassword("")
-                }
-                else{
-                    alert("Đổi mật khẩu thành công!")
-                    loginNav("/login") 
-                }
-            })
-            .catch(err => console.log(err))
+            if(data && data === "Error"){         
+                alert("Đổi mật khẩu thất bại!")
+                setUsername("")
+                setPassword("")
+                setCorfimPassword("")
+            }
+            else{
+                alert("Đổi mật khẩu thành công!")
+                loginNav("/") 
+            }
         }
         else if(username !== "" && password !== corfimPassword){
             alert("Mật khẩu không khớp!")
@@ -59,7 +63,7 @@ function ChangePassword(){
     }
 
     return(
-        <main>
+        <form onSubmit={handlerSubmit}>
             <div className="form-group-change">
                 <div className="title-form">
                     <i className="fa-solid fa-user"></i>
@@ -77,7 +81,7 @@ function ChangePassword(){
                             id="username"
                             placeholder="Tên đăng nhập"
                             value={username} 
-                            onChange={(e) => setUsername(e.target.value)}
+                            onChange={(e) => setUsername(e.target.value.trim())}
                             ref={usernameRef}
                             required
                         />
@@ -93,12 +97,12 @@ function ChangePassword(){
                                 type={show1 === true ? "text" : "password"}
                                 value={password}
                                 placeholder="Mật khầu mới"
-                                onChange={(e) => setPassword(e.target.value)} 
+                                onChange={(e) => setPassword(e.target.value.trim())} 
                                 required
                                 id="password"
                             />
 
-                            <button className="btn-hidden" onClick={handlerClick1}>
+                            <button type="button" className="btn-hidden" onClick={handlerClick1}>
                                 <i 
                                     className={show1 === true ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}
                                 ></i>
@@ -116,12 +120,12 @@ function ChangePassword(){
                                 type={show2 === true ? "text" : "password"}
                                 value={corfimPassword}
                                 placeholder="Nhập lại mật khầu"
-                                onChange={(e) => setCorfimPassword(e.target.value)} 
+                                onChange={(e) => setCorfimPassword(e.target.value.trim())} 
                                 required
                                 id="cofimPassword"
                             />
 
-                            <button className="btn-hidden" onClick={handlerClick2}>
+                            <button type="button" className="btn-hidden" onClick={handlerClick2}>
                                 <i 
                                     className={show2 === true ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}
                                 ></i>
@@ -130,12 +134,12 @@ function ChangePassword(){
                     </div>
 
                     <div className="btn-group">
-                        <button className="btn-submit" onClick={handlerSubmit}>Đổi mật khẩu</button>
-                        <span className="link" onClick={() => {loginNav("/login")}}>Đăng nhập</span>
+                        <button type="submit" className="btn-submit" disabled={isLoading}>Đổi mật khẩu</button>
+                        <Link to="/" className="link">Đăng nhập</Link>
                     </div>
                 </div>
             </div>
-        </main>
+        </form>
     )
 }
 

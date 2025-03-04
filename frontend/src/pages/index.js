@@ -1,8 +1,5 @@
-import Login from './Login'
-import SignUp from './SignUp'
-import ChangePassword from './ChangePassword'
-import Chat from './Chat'
-import Friend from './Friend'
-import Archive from './Archive'
+import Login from '../pages/Login'
+import SignUp from '../pages/SignUp'
+import ChangePassword from '../pages/ChangePassword'
 
-export{ Login, SignUp, ChangePassword, Chat, Friend, Archive }
+export { Login, SignUp, ChangePassword }

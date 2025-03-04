@@ -1,60 +1,58 @@
 import { useNavigate, Link } from 'react-router-dom'
 import { useRef, useState } from 'react'
-import axios from 'axios'
+import useAxios from '../hooks/useAxios'
 import './cssPages/login.css'
 
 export const setLogin = {
-    user: "",
-    state: false,
+    user: "Đăng nhập",
+    state: false
 }
 
 function Login(){
     document.title = "Đăng nhập hệ thống"
-    
-    let homeNav = useNavigate()
-    let signUpNav = useNavigate()
-
+  
+    const ChatNav = useNavigate()
+  
     const usernameRef = useRef()
-
-    const [showPasword, setShowPasword] = useState(false)
+  
+    const [showPassword, setShowPassword] = useState(false)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
-    const handlerClick = () =>{
-        if(!showPasword) setShowPasword(true)
-        else setShowPasword(false)
+    const handlerClick = () => {
+        setShowPassword(!showPassword)
     }
-     
-    const handlerSubmit = (e) =>{
+    
+    const { data, isLoading } = useAxios(
+        "http://localhost:8081",
+        "post",
+        { username, password }
+    )
+
+    const handlerSubmit = async(e) =>{
         e.preventDefault()
         
-        if(username !== "" && password !== ""){
-            axios.post('http://localhost:8081', {username, password})
-            .then(res => {
-                if(res.data === "Success"){
-                    alert("Đăng nhập thành công!")
-                    homeNav("/chat")
-                    setLogin.user = username
-                    setLogin.state = true
-                }
-                else{
-                    alert("Thông tin không chính xác")
-                    setUsername("")
-                    setPassword("")
-                }
-            })
-            .catch(err => console.log(err))
-        }
-        else{
-            alert("Tên đăng nhập hoặc mật không thể rỗng!")
+        if(username !== "" && password !== "")
+            if(data && data === "Success"){
+                alert("Đăng nhập thành công!")
+                ChatNav("/chat")
+                setLogin.user = username
+                setLogin.state = true
+            }
+            else{
+                alert("Thông tin không chính xác")
+                setUsername("")
+                setPassword("")
+        }else{
+            alert("Tên đăng nhập hoặc mật khẩu không thể rỗng!")
             usernameRef.current.focus()
             setUsername("")
             setPassword("")
         }
     }
 
-    return(
-        <main>
+    return (
+        <form onSubmit={handlerSubmit}>
             <div className="form-group-login">
                 <div className="title-form">
                     <i className="fa-solid fa-user"></i>
@@ -86,9 +84,9 @@ function Login(){
                             </div>
 
                             <input 
-                                type={showPasword === true ? "text" : "password"}
+                                type={showPassword ? "text" : "password"}
                                 value={password}
-                                placeholder="Mật khầu"
+                                placeholder="Mật khẩu"
                                 onChange={(e) => setPassword(e.target.value.trim())} 
                                 required
                                 id="password"
@@ -96,21 +94,19 @@ function Login(){
                             />
 
                             <button type="button" className="btn-hidden" onClick={handlerClick}>
-                                <i 
-                                    className={showPasword === true ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}
-                                ></i>
+                                <i className={showPassword ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
                             </button>
                         </div>
                         <span className="link"><Link to="/change-password">Quên mật khẩu?</Link></span>
                     </div>
 
                     <div className="btn-group">
-                        <button type="submit" className="btn-submit" onClick={handlerSubmit}>Đăng nhập</button>
-                        <span className="link" onClick={() => {signUpNav("/signup")}}>Đăng ký</span>
+                        <button type="submit" className="btn-submit" disabled={isLoading}>Đăng nhập</button>
+                        <Link to="/signup" className="link">Đăng ký</Link>
                     </div>
                 </div>
             </div>
-        </main>
+        </form>
     )
 }
 

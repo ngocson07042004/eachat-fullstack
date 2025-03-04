@@ -1,6 +1,6 @@
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useRef, useState } from 'react'
-import axios from 'axios'
+import useAxios from '../hooks/useAxios'
 import './cssPages/signup.css'
 
 function SignUp(){
@@ -25,20 +25,24 @@ function SignUp(){
         else setShow2(false)
     }
 
-    const handlerSubmit = () =>{
+    const { data, isLoading } = useAxios(
+        "http://localhost:8081/signup",
+        "post",
+        {username, password, corfimPassword}
+    )
+
+    const handlerSubmit = (e) =>{
+        e.preventDefault()
+
         if(username !== "" && password === corfimPassword && password !== "" && corfimPassword !== ""){
-            axios.post('http://localhost:8081/signup', {username, password, corfimPassword})
-            .then(res => {
-                if(res.data === "Failed") alert("Tài khoản đã tồn tại!")
-                else{
-                    loginNav("/login")
-                    alert("Đăng ký thành công!")
-                }
-                setUsername("")
-                setPassword("")
-                setCorfimPassword("")
-            })
-            .catch(err => console.log(err))
+            if(data === "Failed") alert("Tài khoản đã tồn tại!")
+            else{
+                loginNav("/")
+                alert("Đăng ký thành công!")
+            }
+            setUsername("")
+            setPassword("")
+            setCorfimPassword("")
         }
         else if(username !== "" && password !== corfimPassword){
             alert("Mật khẩu không khớp!")
@@ -53,7 +57,7 @@ function SignUp(){
     }
 
     return(
-        <main>
+        <form onSubmit={handlerSubmit}>
             <div className="form-group-signup">
                 <div className="title-form">
                     <i className="fa-solid fa-user"></i>
@@ -72,7 +76,7 @@ function SignUp(){
                             name="username"
                             placeholder="Tên đăng nhập"
                             value={username} 
-                            onChange={(e) => setUsername(e.target.value)}
+                            onChange={(e) => setUsername(e.target.value.trim())}
                             ref={usernameRef}
                             required
                         />
@@ -88,7 +92,7 @@ function SignUp(){
                                 type={show1 === true ? "text" : "password"}
                                 value={password}
                                 placeholder="Mật khầu"
-                                onChange={(e) => setPassword(e.target.value)} 
+                                onChange={(e) => setPassword(e.target.value.trim())} 
                                 required
                                 id="password"
                                 name="password"
@@ -112,7 +116,7 @@ function SignUp(){
                                 type={show2 === true ? "text" : "password"}
                                 value={corfimPassword}
                                 placeholder="Nhập lại mật khầu"
-                                onChange={(e) => setCorfimPassword(e.target.value)} 
+                                onChange={(e) => setCorfimPassword(e.target.value.trim())} 
                                 required
                                 id="cofimPassword"
                                 name="cofimPassword"
@@ -127,12 +131,12 @@ function SignUp(){
                     </div>
 
                     <div className="btn-group">
-                        <button type="submit" className="btn-submit" onClick={handlerSubmit}>Đăng ký</button>
-                        <span className="link" onClick={() => {loginNav("/login")}}>Đăng nhập</span>
+                        <button type="submit" className="btn-submit" disabled={isLoading}>Đăng ký</button>
+                        <Link to="/" className="link">Đăng nhập</Link>
                     </div>
                 </div>
             </div>
-        </main>
+        </form>
     )
 }
 
