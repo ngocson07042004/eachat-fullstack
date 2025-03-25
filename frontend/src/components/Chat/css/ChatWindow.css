@@ -1,0 +1,72 @@
+.chat-window{
+    width: 100%;
+    height: calc(100% - 17%);
+    border-bottom: 1px solid rgb(179, 174, 174);
+    overflow-y: auto;
+}
+
+.chat-window>ul{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.chat-window>ul>li{
+    width: 100%;
+    display: flex;
+}
+
+.chat-window>ul>li:not(.chat-window>ul>li:first-child){
+    margin-top: 10px;
+}
+
+.chat-window>ul>li.sender{
+    justify-content: flex-end;
+}
+
+.chat-window>ul>li.receiver{
+    justify-content: flex-start;
+}
+
+.chat-window>ul>li.sender>.chat{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.chat-window>ul>li.receiver>.chat{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.chat-window>ul>li>.chat>img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.chat-window>ul>li>.chat>.info{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-window>ul>li>.chat>.info>p{
+    width: max-content;
+    height: auto;
+    word-wrap: break-word;
+    padding: 6px;
+    color: white
+}
+
+.chat-window .sender .info>p{
+    background: rgb(76, 76, 158);
+    border-radius: 5px 0 5px 5px;
+}
+
+.chat-window .receiver .info>p{
+    background: rgb(120, 120, 161);
+    border-radius: 0 5px 5px 5px;
+}

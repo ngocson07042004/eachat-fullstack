@@ -1,0 +1,46 @@
+.info{
+    height: 30px;
+    display: flex;
+}
+
+.info .img-list{
+    width: 20%;
+    height: 100%;
+    display: flex;
+}
+
+.info .img-list>img{
+    width: 30px;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px solid rgb(192, 167, 167);
+}
+
+.info .img-list>span.more-avatar{
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgb(235, 196, 196);
+    padding: 5px;
+    border: 1px solid rgb(192, 167, 167);
+}
+
+.info .img-list>img ~ img{
+    margin-left: -20px;
+}
+
+.info .img-list>span.more-avatar{
+    margin-left: -23px;
+}
+
+.info .info-title{
+    width: 70%;
+    height: 100%;
+    margin-left: 3px;
+    color: black;
+}
+
+.info .room-info>*{
+    font-size: .9rem;
+}

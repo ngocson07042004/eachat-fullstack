@@ -2,7 +2,7 @@ const db = require("../database")
 
 const userModel = {
     login: (req, res) =>{
-        let sql = "SELECT * FROM user_tb WHERE `Username` = ? AND `Password` = ?"
+        let sql = "SELECT * FROM users WHERE `username` = ? AND `password` = ?"
     
         db.query(sql, [req.body.username, req.body.password], (err, data) =>{
             if(err) return res.json("Error")
@@ -14,8 +14,8 @@ const userModel = {
     },
 
     signUp: (req, res) =>{
-        let sqlInsert = "INSERT INTO user_tb (`Username`, `Password`, `CorfimPassword`) VALUES (?)"
-        let sqlSelect = "SELECT * FROM user_tb WHERE `Username` = ?"
+        let sqlInsert = "INSERT INTO users (`username`, `password`, `corfimPassword`) VALUES (?)"
+        let sqlSelect = "SELECT * FROM users WHERE `username` = ?"
         const values = [
             req.body.username,
             req.body.password,
@@ -34,7 +34,7 @@ const userModel = {
     },
 
     changePassword: (req, res) =>{
-        let sql = "UPDATE user_tb SET `Password` = ?, `CorfimPassword` = ? WHERE `Username` = ?"
+        let sql = "UPDATE users SET `password` = ?, `corfimPassword` = ? WHERE `username` = ?"
         const values = [
             req.body.username,
             req.body.password,
@@ -47,14 +47,6 @@ const userModel = {
             
         })
     },
-
-    getUser: (req, res) =>{
-        const sql = "SELECT * FROM user_tb"
-        db.query(sql, (err, data) =>{
-            if(err) return res.json("Error")
-            return res.json(data)
-        })
-    }
 }
 
 module.exports = userModel

@@ -1,0 +1,33 @@
+.input-text{
+    width: 100%;
+    height: 10%
+}
+
+.input-text form{
+    width: 100%;
+    width: 100%;
+    display: flex;
+    padding: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-text form textarea{
+    width: 90%;
+    resize: none;
+    border: 1px solid rgb(143, 140, 140);
+    border-radius: 50px;
+    padding: 3px 25px;
+    overflow: hidden;
+    outline: none;
+}
+
+.input-text form button{
+    width: 30px;
+    height: 30px;
+    outline: none;
+    border: none;
+    background: none;
+    font-size: 1.1rem;
+    color: rgb(33, 33, 246);
+}

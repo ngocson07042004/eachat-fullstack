@@ -1,0 +1,6 @@
+.room-container{
+    width: 25%;
+    height: var(--height);
+    background: white;
+    border-radius: 10px;
+}

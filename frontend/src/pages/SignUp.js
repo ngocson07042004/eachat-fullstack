@@ -11,9 +11,9 @@ function SignUp(){
 
     const [show1, setShow1] = useState(false)
     const [show2, setShow2] = useState(false)
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const [corfimPassword, setCorfimPassword] = useState('')
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [corfimPassword, setCorfimPassword] = useState("")
 
     const handlerClick1 = () =>{
         if(!show1) setShow1(true)

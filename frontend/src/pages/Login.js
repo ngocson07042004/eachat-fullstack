@@ -16,8 +16,8 @@ function Login(){
     const usernameRef = useRef()
   
     const [showPassword, setShowPassword] = useState(false)
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
 
     const handlerClick = () => {
         setShowPassword(!showPassword)
@@ -29,7 +29,7 @@ function Login(){
         { username, password }
     )
 
-    const handlerSubmit = async(e) =>{
+    const handlerSubmit = (e) =>{
         e.preventDefault()
         
         if(username !== "" && password !== "")

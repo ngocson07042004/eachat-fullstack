@@ -102,32 +102,17 @@ io.on("connection", (socket) => {
   })
 
   // Khi người dùng gửi tin nhắn
-  socket.on("send", (data) => {
-    const { username, message, roomName } = data
+  socket.on("sender", (data) => {
+    const { hashRoom, username, message } = data
     console.log(data)
 
-    // Nếu người dùng offline, lưu tin nhắn vào cơ sở dữ liệu
-    if (!socket.connected) {
-      db.query(
-        "INSERT INTO chat_tb (username, room_name, message) VALUES (?, ?, ?)",
-        [username, roomName, message],
-        (err) => {
-          if (err) {
-            console.error("Error saving message:", err)
-          } else {
-            console.log(`Tin nhắn của ${username} đã được lưu vào cơ sở dữ liệu`)
-          }
-        }
-      )
-    } else {
-      // Gửi tin nhắn tới tất cả những người trong phòng, trừ người gửi
+    db.query("INSERT INTO messages (room_id, sender_id, content) VALUES (?, ?, ?)",
+        [hashRoom, username, message], err => console.log(err))
       socket.to(roomName).emit("receiver", { username, message })
-      console.log(`Sent message to room: ${roomName}`)
-    }
-  })
+    })
 
   socket.on("disconnect", () => {
-    console.log(`${socket.username} đã ngắt kết nối`)
+    console.log(`Đã ngắt kết nối`)
   })
 })
 

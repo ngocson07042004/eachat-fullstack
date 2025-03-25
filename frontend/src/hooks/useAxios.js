@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 // Custom Hook
-const useAxios = (url, method = 'GET', body = null) => {
+const useAxios = (url, method = "GET", body = null) => {
     const [data, setData] = useState(null) // Dữ liệu trả về từ API
     const [isLoading, setIsLoading] = useState(true) // Trạng thái loading
 
