@@ -1,5 +1,7 @@
 import ChatContainer from './Chat/ChatContainer'
-import Sidebar from './Sidebar'
 import RoomContainer from './Room/RoomContainer'
-import AddRoom from './Room/AddRoom'
-export { ChatContainer, Sidebar, RoomContainer, AddRoom}
+import FormSearch from './FormSearch'
+import NewChat from './NewChat'
+import Toast from './Toast'
+
+export { ChatContainer, RoomContainer, FormSearch, NewChat, Toast }

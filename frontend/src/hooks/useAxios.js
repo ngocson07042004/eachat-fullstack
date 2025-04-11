@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-// Custom Hook
-const useAxios = (url, method = "GET", body = null) => {
+function useAxios(url, method = "GET", body = null){
     const [data, setData] = useState(null) // Dữ liệu trả về từ API
     const [isLoading, setIsLoading] = useState(true) // Trạng thái loading
 
@@ -18,7 +17,8 @@ const useAxios = (url, method = "GET", body = null) => {
                 setData(res.data) // Cập nhật dữ liệu
             }catch (err){
                 console.log(err)
-            }finally{
+            }
+            finally{
                 setIsLoading(false) // Đã lấy dữ liệu thành công!
             }
         }

@@ -1,0 +1,70 @@
+.new-chat form{
+    width: 290px;
+    height: 270px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.new-chat form .new-chat-header{
+    width: 100%;
+    height: 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.new-chat form .new-chat-header button#btn-close{
+    width: 30px;
+    height: 30px;
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+}
+
+.new-chat form .new-chat-header h4{
+    width: calc(100% - 30px);
+    text-align: center;
+}
+
+.new-chat form .input-group-auth{
+    width: 100%;
+    height: 93%;
+}
+
+.new-chat form .input-group-auth form.form-search{
+    height: 40px;
+}
+
+.new-chat form .input-group-auth ul{
+    width: 100%;
+    height: calc(100% - 40px);
+    margin-top: 5px;
+    overflow-y: auto;
+}
+
+.new-chat form .input-group-auth ul li{
+    width: 100%;
+    height: 30px;
+}
+
+.new-chat form .input-group-auth ul li a{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    color: black;
+}
+
+.new-chat form .input-group-auth ul li img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid rgba(42, 42, 42, .3);
+}

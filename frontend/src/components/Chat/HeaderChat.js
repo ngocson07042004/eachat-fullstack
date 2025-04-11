@@ -5,7 +5,7 @@ import './css/ChatHeader.css'
 
 function HeaderChat() {
     const location = useLocation()
-    const { roomName } = location.state || {}
+    const { roomName, avatar } = location.state || {}
 
     return (
         <div className="header-chat">
@@ -13,10 +13,10 @@ function HeaderChat() {
                 <i className="fa-solid fa-arrow-left"></i>
             </button>
 
-            <Info roomName={roomName} moreAvatar={true} />
+            <Info roomName={roomName} image={avatar} onlineUser={roomName}/>
 
-            <button type="button" id="btn-add">
-                <i className="fa-solid fa-user-plus"></i>
+            <button type="button" id="btn-search">
+                <i className="fa-solid fa-magnifying-glass"></i>
             </button>
         </div>
     )

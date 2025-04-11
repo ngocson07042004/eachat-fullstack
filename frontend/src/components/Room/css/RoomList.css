@@ -4,28 +4,32 @@
     padding: 5px;
 }
 
-.room-list details{
+.room-list ul{
     width: 100%;
-    height: auto;
-    cursor: pointer;
-}
-
-details summary{
-    width: 100%;
-    user-select: none;
-}
-
-details .room{
-    width: 100%;
-    height: 35px;
-    background: rgb(196, 178, 178);
+    height: 100%;
+    overflow-y: auto;
     padding: 3px 0;
 }
 
-details .room:not(details .room:first-child){
-    margin-top: 5px;
+.room-list ul li{
+    width: 100%;
+    height: 45px;
+    padding: 3px;
+    border-radius: 5px;
+    box-shadow: 2px 4px 2px rgba(23, 23, 23, .2);
 }
 
-details .room>.info{
+.room-list ul li:not(.room-list ul li:first-child){
+    margin-top: 10px;
+}
+
+.room-list ul li a.room{
     width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.room-list ul li:hover{
+    background: rgba(193, 188, 188, 0.5);
 }

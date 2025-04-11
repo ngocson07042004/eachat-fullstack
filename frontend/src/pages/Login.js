@@ -1,112 +1,137 @@
-import { useNavigate, Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useRef, useState } from 'react'
-import useAxios from '../hooks/useAxios'
+import { useDataGlobal } from '../hooks'
 import './cssPages/login.css'
+import { Toast }from '../components'
+import axios from 'axios'
 
 export const setLogin = {
     user: "Đăng nhập",
-    state: false
+    state: false,
 }
 
 function Login(){
     document.title = "Đăng nhập hệ thống"
-  
-    const ChatNav = useNavigate()
-  
+
     const usernameRef = useRef()
+    const ChatNav = useNavigate()
+    const { setIsShowToast } = useDataGlobal()
   
     const [showPassword, setShowPassword] = useState(false)
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
-
-    const handlerClick = () => {
-        setShowPassword(!showPassword)
-    }
+    const [toast, setToast] = useState({
+        icon: "",
+        title: "",
+        message: "",
+    })
     
-    const { data, isLoading } = useAxios(
-        "http://localhost:8081",
-        "post",
-        { username, password }
-    )
+    const [formData, setFormData] = useState({
+        username: "",
+        password: "",
+    })
 
-    const handlerSubmit = (e) =>{
+    const handleChange = (e) =>{
+        const { name, value } = e.target
+        setFormData({ ...formData, [name]: value.trim() })
+    }
+
+    const handleSubmit = async(e) =>{
         e.preventDefault()
-        
-        if(username !== "" && password !== "")
-            if(data && data === "Success"){
-                alert("Đăng nhập thành công!")
-                ChatNav("/chat")
-                setLogin.user = username
-                setLogin.state = true
+        const { username, password } = formData
+
+        if(username !== "" && password !== ""){     
+            try{
+                const res = await axios.post("http://localhost:8081", formData)
+
+                if(res.data === "Success"){
+                    setToast({
+                        icon: "success",
+                        title: "Thành công",
+                        message: "Đăng nhập thành công!"
+                    })
+                    ChatNav("/chat")
+                    setLogin.user = username
+                    setLogin.state = true
+                    setIsShowToast(true)
+                }
+                else{
+                    setToast({
+                        icon: "danger",
+                        title: "Thất bại",
+                        message: "Thông tin không chính xác!"
+                    })
+                    setFormData({
+                        username: "",
+                        password: "",
+                    })
+                    setIsShowToast(true)
+                }
             }
-            else{
-                alert("Thông tin không chính xác")
-                setUsername("")
-                setPassword("")
-        }else{
-            alert("Tên đăng nhập hoặc mật khẩu không thể rỗng!")
-            usernameRef.current.focus()
-            setUsername("")
-            setPassword("")
+            catch(err){
+                console.log(err)
+            }
         }
     }
 
     return (
-        <form onSubmit={handlerSubmit}>
-            <div className="form-group-login">
-                <div className="title-form">
-                    <i className="fa-solid fa-user"></i>
-                    <h5>Đăng nhập</h5> 
-                </div>
-
-                <div className="input-group">
-                    <div className="username input-data">
-                        <div className="icon">
-                            <i className="fa-solid fa-user"></i> 
-                        </div>
-
-                        <input 
-                            type="text"
-                            id="username"
-                            name="username"
-                            placeholder="Tên đăng nhập"
-                            value={username} 
-                            onChange={(e) => setUsername(e.target.value.trim())}
-                            ref={usernameRef}
-                            required
-                        />
+        <>
+            <form onSubmit={handleSubmit}>
+                <div className="form-group-login">
+                    <div className="title-form">
+                        <i className="fa-solid fa-user"></i>
+                        <h5>Đăng nhập</h5> 
                     </div>
 
-                    <div className="password input-data">
-                        <div className="password-show">
+                    <div className="input-group">
+                        <div className="username input-data">
                             <div className="icon">
-                                <i className="fa-solid fa-lock"></i> 
+                                <i className="fa-solid fa-user"></i> 
                             </div>
 
                             <input 
-                                type={showPassword ? "text" : "password"}
-                                value={password}
-                                placeholder="Mật khẩu"
-                                onChange={(e) => setPassword(e.target.value.trim())} 
+                                type="text"
+                                id="username"
+                                name="username"
+                                placeholder="Tên đăng nhập"
+                                value={formData.username} 
+                                onChange={handleChange}
+                                ref={usernameRef}
                                 required
-                                id="password"
-                                name="password"
                             />
-
-                            <button type="button" className="btn-hidden" onClick={handlerClick}>
-                                <i className={showPassword ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
-                            </button>
                         </div>
-                        <span className="link"><Link to="/change-password">Quên mật khẩu?</Link></span>
-                    </div>
 
-                    <div className="btn-group">
-                        <button type="submit" className="btn-submit" disabled={isLoading}>Đăng nhập</button>
-                        <Link to="/signup" className="link">Đăng ký</Link>
+                        <div className="password input-data">
+                            <div className="password-show">
+                                <div className="icon">
+                                    <i className="fa-solid fa-lock"></i> 
+                                </div>
+
+                                <input 
+                                    type={showPassword ? "text" : "password"}
+                                    value={formData.password}
+                                    placeholder="Mật khẩu"
+                                    onChange={handleChange} 
+                                    required
+                                    id="password"
+                                    name="password"
+                                />
+
+                                <button type="button" className="btn-hidden" onClick={() => setShowPassword(!showPassword)}>
+                                    <i className={showPassword ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
+                                </button>
+                            </div>
+                            <span className="link"><Link to="/change-password">Quên mật khẩu?</Link></span>
+                        </div>
+
+                        <div className="btn-group">
+                            <button type="submit" className="btn-submit">Đăng nhập</button>
+                            <Link to="/signup" className="link">Đăng ký</Link>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+
+            <Toast icon={toast.icon} title={toast.title} message={toast.message}/>
+        </>
     )
 }
 

@@ -1,11 +1,11 @@
-header{
+.header-room{
     width: 100%;
     height: 17%;
     padding: 5px;
-    border-bottom: 1px solid rgb(189, 175, 175);
+    position: relative;
 }
 
-header .header-title{
+.header-room .header-title{
     width: 100%;
     height: 40px;
     display: flex;
@@ -13,7 +13,7 @@ header .header-title{
     align-items: center;
 }
 
-header .header-title button{
+.header-room .header-title button{
     width: 40px;
     height: 100%;
     border: none;
@@ -22,38 +22,59 @@ header .header-title button{
     cursor: pointer;
 }
 
-header .header-title button>i{
+.header-room .header-title button>i{
     font-size: 1.1rem;
 }
 
-header .input-group{
+.header-room .header-title ul.menubar{
+    width: max-content;
+    height: auto;
+    background: rgb(212, 212, 212);
+    padding: 5px;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.header-room .header-title ul.menubar::before{
+    content: "";
+    border-left: 10px solid transparent;;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid rgb(212, 212, 212);
+    position: absolute;
+    top: -10px;
+    right: 15px;
+}
+
+.header-room .header-title ul.menubar li{
     width: 100%;
     height: 30px;
-    border-radius: 10px;
-    border: 1px solid rgb(189, 175, 175);
     display: flex;
-    margin-top: 10px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3px;
+    text-align: center;
 }
 
-header .input-group input[type="text"]{
-    width: calc(100% - 30px);
-    height: 100%;
-    border: none;
-    background: none;
-    outline: none;
-    padding: 7px;
+.header-room .header-title ul.menubar li>i{
+    width: auto;
+    height: auto;
+    padding: 5px;
 }
 
-header .input-group button{
+.header-room .header-title ul.menubar li:last-child img{
     width: 30px;
-    height: 100%;
-    border: none;
-    background: none;
-    outline: none;
+    height: 30px;
+    border-radius: 50%;
 }
 
-@media (max-width: 992px){
-    header form{
-        margin-top: 10px;
-    }
+.header-room .header-title ul.menubar li:last-child{
+    justify-content: start;
+}
+
+.header-room .header-title ul.menubar li:hover:not(ul.menubar li:last-child){
+    background: rgb(164, 163, 163);
+    cursor: pointer;
 }

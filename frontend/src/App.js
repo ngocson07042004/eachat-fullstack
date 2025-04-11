@@ -1,10 +1,8 @@
 import React from 'react'
 import { Route, Routes, BrowserRouter } from 'react-router-dom'
 import { Login, ChangePassword, SignUp, Chat } from './pages'
-import Provider from './context/'
-import { AddRoom } from './components'
-//import 'slick-carousel/slick/slick.css'
-//import 'slick-carousel/slick/slick-theme.css'
+import Provider from './context'
+import { NewChat  } from './components'
 
 export default function App(){
     return(
@@ -17,9 +15,8 @@ export default function App(){
                     <Route path="/chat" element={<Chat/>}/>
                     <Route path="/chat/:id" element={<Chat/>}/>
                 </Routes>
+                <NewChat/>
             </BrowserRouter>
-            <div className="overlay" id="overlay"></div>
-            <AddRoom/>
         </Provider>
     )
 }

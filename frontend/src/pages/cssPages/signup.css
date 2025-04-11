@@ -11,24 +11,40 @@ form{
 
 .form-group-signup{
     width: 450px;
-    height: 330px;
+    height: 520px;  /* Tăng chiều cao để chứa các input mới */
     border: 1px solid black;
     border-radius: 5px;
-    margin: 10% auto;
+    margin: 3% auto;
+    padding: 15px;
 }
 
 .form-group-signup .title-form{
     height: 30%;
-    text-align: center;
-    padding: 4% 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-.title-form>i{
-    font-size: clamp(1.875rem, 1.648rem + 1.136vw, 2.5rem);
+.title-form .img-info{
+    width: 60px;
+    height: 60px;
+    border: 1px solid rgb(162, 155, 155);
+    border-radius: 50%;
+    position: relative;
 }
 
-.title-form>h5{
-    font-size: 30px;
+.title-form .img-info img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.title-form .img-info label{
+    position: absolute;
+    bottom: 0;
+    right: -7%;
+    cursor: pointer;
 }
 
 .form-group-signup .input-group{
@@ -40,14 +56,15 @@ form{
 }
 
 .form-group-signup .input-group .input-data{
-    width: 90%;
+    width: 100%;
     height: 15%;
     border: 1px solid rgb(202, 176, 176);
     border-radius: 5px;
+    display: flex;
 }
 
-.form-group-signup .username,
 .form-group-signup .password-show{
+    width: 100%;
     display: flex;
 }
 
@@ -61,19 +78,28 @@ form{
     font-size: 0.85rem;
 }
 
-.form-group-signup .input-group input{
+.form-group-signup .input-group input,
+.form-group-signup .input-group select{
     border: none;
     outline: none;
     background: none;
     padding: 6px;
 }
 
-.form-group-signup .input-group input#username{
-    width: calc(100% - 30px);
+.form-group-signup .input-group .gender label{
+    width: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-group-signup .input-group input:not(input#password, input#corfimPassword),
+.form-group-signup .input-group select#gender{
+    width: calc(100% - 35px);
 }
 
 .form-group-signup .input-group input#password,
-.form-group-signup .input-group input#cofimPassword{
+.form-group-signup .input-group input#corfimPassword{
     width: calc(100% - 35px);
 }
 
@@ -99,6 +125,7 @@ form{
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    margin-top: 10px;
 }
 
 .form-group-signup .btn-group button.btn-submit{
@@ -121,7 +148,7 @@ form{
     .form-group-signup{
         width: 100%;
         justify-content: space-between;
-        height: 350px;
+        height: 450px;
         border: none;
     }
 
@@ -129,12 +156,8 @@ form{
         margin: 0 auto;
     }
 
-    .form-group-signup .input-group input#username{
-        width: 100%;
-    }
-    
-    .form-group-signup .input-group input#password,
-    .form-group-signup .input-group input#cofimPassword{
+    .form-group-signup .input-group input,
+    .form-group-signup .input-group select{
         width: 100%;
     }
 

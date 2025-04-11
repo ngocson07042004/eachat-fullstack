@@ -1,23 +1,13 @@
-import { createContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import useAxios from '../hooks/useAxios'
-
+import { createContext, useState } from 'react'
 
 export const AppContext = createContext()
 
 export default function AppProvider({ children }){
-    const { id } = useParams()
-    const { data } = useAxios(`http://localhost:8081/chat/${id}`)
-    const [chats, setChats] = useState([])
-    const [isVisible, setIsVisible] = useState(false)
+    const [isShowNewChat, setIsShowNewChat] = useState(false)
+    const [isShowToast, setIsShowToast] = useState(false)
 
-    useEffect(() => {
-        if(chats)
-            setChats(data)
-    }, [data, chats])
-    
     return(
-        <AppContext.Provider value={{ chats, isVisible, setIsVisible }}>
+        <AppContext.Provider value={{ isShowNewChat, setIsShowNewChat, isShowToast, setIsShowToast }}>
             {children}
         </AppContext.Provider>
     )

@@ -1,34 +1,18 @@
-import { useContext, useEffect, useState } from "react"
-import "./css/Info.css"
-import { AuthContext } from "../context"
+import React from 'react'
+import './css/Info.css'
 
-function Info({ roomName, moreAvatar }){  
-    const { user } = useContext(AuthContext)
-    const [imgs, setImgs] = useState([])
-
-    useEffect(() => {
-        if (Array.isArray(user) && user.length > 0) {
-            const avatars = user.filter(user => user.roomname === roomName)
-            .map(user => user.avatar)
-            setImgs(avatars)
-        }
-    }, [user, roomName])
-    
-    return(
+function Info({ roomName, image }) {
+    return (
         <div className="info">
-            <div className="img-list">
-                {imgs.slice(0, 2).map((item, index) => (
-                    <img key={index} src={item} alt="avatar"/>
-                ))}
-                {imgs.length > 2 ? <span className="more-avatar">+{imgs.length - 2}</span> : <span></span>}
+            <div className="img-info">
+                <img src={`http://localhost:8081/users/${image}`} alt="Avatar" />
             </div>
 
             <div className="info-title">
-                <h5>{roomName}</h5>
-                {moreAvatar ? <span className="more-avatar">{`${imgs.length} người`}</span> : <span></span>}
+                <h4>{roomName}</h4>
             </div>
         </div>
     )
 }
 
-export default Info
+export default React.memo(Info)

@@ -1,5 +1,5 @@
 .chat-container{
-    width: calc(100% - (30% + 20px));
+    width: calc(75% - 10px);
     height: var(--height);
     border-radius: 10px;
     background: white;
@@ -15,4 +15,10 @@
     height: 100%;
     display: grid;
     place-items: center;
+}
+
+@media (max-width: 576px){
+    .chat-container{
+        width: 100%;
+    }
 }

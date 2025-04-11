@@ -27,7 +27,7 @@ a{
   text-decoration: none;
 }
 
-.overlay{
+#overlay{
   position: fixed;
   top: 0;
   left: 0;
@@ -37,6 +37,6 @@ a{
   height: 100vh;
   background: rgba(0, 0, 0, 0.3);
   z-index: 1;
-  display: none;
+  display: block;
   transition: display .3s;
 }
