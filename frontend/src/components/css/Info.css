@@ -17,14 +17,26 @@
 }
 
 .info .info-title{
-    width: 70%;
+    width: calc(100% - 30px);
     height: 100%;
     margin-left: 3px;
     color: black;
-    display: flex;
-    align-items: center;
 }
 
-.info .room-info>*{
-    font-size: .9rem;
+.info .info-title .content-info{
+    width: 100%;
+    display: flex;
+}
+
+.info .info-title .content-info span.content{
+    font-size: clamp(0.875rem, 0.8495rem + 0.1672vw, 1rem);
+    display: block;
+    width: max-content;
+}
+
+.info .info-title .content-info span.timer{
+    font-size: clamp(0.875rem, 0.8495rem + 0.1672vw, 1rem);
+    display: block;
+    width: fit-content;
+    padding-left: 5px;
 }

@@ -16,7 +16,6 @@
     height: 45px;
     padding: 3px;
     border-radius: 5px;
-    box-shadow: 2px 4px 2px rgba(23, 23, 23, .2);
 }
 
 .room-list ul li:not(.room-list ul li:first-child){
@@ -28,6 +27,10 @@
     height: 100%;
     display: flex;
     align-items: center;
+}
+
+.room-list ul li a.room .info{
+    width: 100%;
 }
 
 .room-list ul li:hover{

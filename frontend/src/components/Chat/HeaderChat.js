@@ -1,15 +1,16 @@
 import React from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Info from '../Info'
 import './css/ChatHeader.css'
 
-function HeaderChat() {
+function HeaderChat(){
+    const navigate = useNavigate()
     const location = useLocation()
     const { roomName, avatar } = location.state || {}
 
-    return (
+    return(
         <div className="header-chat">
-            <button type="button" id="btn-close">
+            <button type="button" id="btn-close" onClick={() => navigate("/chat")}>
                 <i className="fa-solid fa-arrow-left"></i>
             </button>
 

@@ -6,3 +6,9 @@
     padding: 10px;
     background: var(--background);
 }
+
+@media (max-width: 576px){
+    .container{
+        padding: 0;
+    }
+}

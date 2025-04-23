@@ -1,12 +1,12 @@
 import { NavLink, useParams } from 'react-router-dom'
-import React, { useDeferredValue, useEffect, useState } from 'react'
+import React, { useDeferredValue, useEffect, useState, useCallback } from 'react'
+import SHA256 from 'crypto-js/sha256'
 import { useDataGlobal } from '../../hooks'
 import { setLogin } from '../../pages/Login'
 import Info from '../Info'
-import SHA256 from 'crypto-js/sha256'
 import './css/RoomList.css'
 
-function RoomList() {
+function RoomList(){
     const { user } = useDataGlobal()
     const { id } = useParams()
     const [auth, setAuth] = useState([])
@@ -19,12 +19,39 @@ function RoomList() {
             setAuth(filter)
         }
     }, [user])
+    
+    //Định dạng thời gian VD: 1 ngày, 1 giây trước...
+    const formatDateTime = useCallback(dateStr => {
+        const rtf = new Intl.RelativeTimeFormat("vi", { numeric: "auto" })
+
+        const now = Date.now()
+        const past = new Date(dateStr)
+        const diffInSeconds = Math.floor((now - past) / 1000)
+
+        const ranges = [
+            { unit: "year", seconds: 31536000 },
+            { unit: "month", seconds: 2592000 },
+            { unit: "day", seconds: 86400 },
+            { unit: "hour", seconds: 3600 },
+            { unit: "minute", seconds: 60 },
+            { unit: "second", seconds: 1 },
+        ]
+
+        for (let range of ranges) {
+            let diff = Math.floor(diffInSeconds / range.seconds)
+            if (Math.abs(diff) >= 1) {
+                return rtf.format(-diff, range.unit)
+            }
+        }
+
+        return "Vừa xong"
+    }, [])   
 
     const createHashRoom = (user1, user2) => {
         return SHA256([user1, user2].sort().join("-")).toString()
     }
 
-    return (
+    return(
         <div className="room-list">
             <ul>
                 {deferredAuth && deferredAuth.length > 0 ? (
@@ -44,6 +71,8 @@ function RoomList() {
                                     <Info 
                                         roomName={`${item.lastname} ${item.name}`} 
                                         image={item.avatar}
+                                        content={`${item.lastname} ${item.name}: ${item.content}`}
+                                        timer={formatDateTime(item.created_at)}
                                     />
                                 </NavLink>
                             </li>

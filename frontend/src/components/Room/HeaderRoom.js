@@ -10,7 +10,7 @@ function HeaderRoom(){
     const [auth, setAuth] = useState({})
 
     // Lấy user đã được đăng nhập
-    useEffect(() =>{
+    useEffect(() => {
         if(user)
             setAuth(user.find(item => item.username === setLogin.user))
     }, [user])

@@ -24,7 +24,7 @@ function ChangePassword() {
         message: "",
     })
 
-    const handleChange = (e) => {
+    const handleChange = e => {
         const { name, value } = e.target
         setFormData({ ...formData, [name]: value.trim() })
     }
@@ -33,7 +33,7 @@ function ChangePassword() {
         e.preventDefault()
         const { username, password, corfimPassword } = formData
 
-        if (!username || !password || !corfimPassword) {
+        if(!username || !password || !corfimPassword){
             setToast({
                 icon: "warning",
                 title: "Cảnh báo",
@@ -42,7 +42,7 @@ function ChangePassword() {
             return
         }
 
-        if (password !== corfimPassword) {
+        if(password !== corfimPassword){
             setToast({
                 icon: "warning",
                 title: "Cảnh báo",
@@ -56,7 +56,7 @@ function ChangePassword() {
             return
         }
 
-        try {
+        try{
             const res = await axios.post("http://localhost:8081/change-password", formData)
 
             if (res.data === "Success"){
@@ -69,7 +69,7 @@ function ChangePassword() {
             } 
             else{
                 setToast({
-                    icon: "danger",
+                    icon: "error",
                     title: "Thất bại",
                     message: "Đổi mật khẩu thất bại!",
                 })
@@ -79,17 +79,18 @@ function ChangePassword() {
                     corfimPassword: "",
                 })
             }
-        } catch (err){
+        } 
+        catch (err){
             console.log(err)
             setToast({
-                icon: "danger",
+                icon: "error",
                 title: "Lỗi hệ thống",
                 message: "Không thể kết nối đến máy chủ!",
             })
         }
     }
 
-    return (
+    return(
         <>
             <form onSubmit={handleSubmit}>
                 <div className="form-group-change">

@@ -29,12 +29,12 @@ function Login(){
         password: "",
     })
 
-    const handleChange = (e) =>{
+    const handleChange = e => {
         const { name, value } = e.target
         setFormData({ ...formData, [name]: value.trim() })
     }
 
-    const handleSubmit = async(e) =>{
+    const handleSubmit = async(e) => {
         e.preventDefault()
         const { username, password } = formData
 
@@ -55,7 +55,7 @@ function Login(){
                 }
                 else{
                     setToast({
-                        icon: "danger",
+                        icon: "error",
                         title: "Thất bại",
                         message: "Thông tin không chính xác!"
                     })
@@ -68,11 +68,17 @@ function Login(){
             }
             catch(err){
                 console.log(err)
+                console.log(err)
+                setToast({
+                    icon: "error",
+                    title: "Lỗi hệ thống",
+                    message: "Không thể kết nối đến máy chủ!",
+                })
             }
         }
     }
 
-    return (
+    return(
         <>
             <form onSubmit={handleSubmit}>
                 <div className="form-group-login">

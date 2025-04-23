@@ -1,8 +1,14 @@
 .room-container{
-    width: 25%;
+    width: 28%;
     height: var(--height);
     background: white;
     border-radius: 10px;
+}
+
+@media (max-width: 1024px){
+    .room-container{
+        width: 40%;
+    }
 }
 
 @media (max-width: 576px){

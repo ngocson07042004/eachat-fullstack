@@ -1,9 +1,7 @@
 const { Server } = require("socket.io")
 const db = require("./database")
 
-let userStatuses = {}
-
-function setupServer(server) {
+function setupServer(server){
   const io = new Server(server, { cors: { origin: "*" } })
 
   io.on("connection", socket => {

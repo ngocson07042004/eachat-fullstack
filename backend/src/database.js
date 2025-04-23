@@ -9,10 +9,10 @@ const connected = mysql.createConnection({
 })
 
 
-connected.connect(err =>{
+connected.connect(err => {
     if(err) console.log(err)
     console.log("Connected!")
-    connected.query("USE eachat", error =>{
+    connected.query("USE eachat", error => {
         if(error) console.log(error)
         console.log("Connected database!")   
     })

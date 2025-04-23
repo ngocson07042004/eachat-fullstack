@@ -5,14 +5,17 @@ function FormSearch({ placeholder, value, handleChange }){
     return(
         <div className="form-search">
             <div className="input-group">
+                <div className="icon">
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                </div>
+
                 <input 
-                    type="text" 
+                    type="search" 
                     name="search" 
                     id="search" 
                     placeholder={placeholder}
                     onChange={handleChange}
                     value={value}
-                    maxlength="30"
                 />
             </div>
          </div>

@@ -11,14 +11,14 @@ function InputText({ users, setChats, username }){
     const location = useLocation()
     const { roomid } = location.state || {}
 
-    useEffect(() =>{
+    useEffect(() => {
         if(users){
             //Lấy ra object có username trùng với tên đăng nhập
             setAuth(users.find(item => item.username === username))
         }
     }, [users, username])
     
-    const handleSendMessage = (e) => {
+    const handleSendMessage = e => {
         e.preventDefault()
         
         if(message){
@@ -65,7 +65,6 @@ function InputText({ users, setChats, username }){
                     id="chat"
                     value={message}
                     placeholder="Aa"
-                    maxLength={180}
                     onChange={(e) => setMessage(e.target.value)}
                 ></input>
                 

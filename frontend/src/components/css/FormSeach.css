@@ -13,8 +13,17 @@
     margin-top: 10px;
 }
 
-.form-search .input-group input[type="text"]{
-    width: 100%;
+.form-search .input-group .icon{
+    width: 30px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(167, 153, 153)
+}
+
+.form-search .input-group input[type="search"]{
+    width: calc(100% - 30px);
     height: 100%;
     border: none;
     background: none;

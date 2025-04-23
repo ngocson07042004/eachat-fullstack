@@ -15,13 +15,13 @@ function NewChat(){
 
     // Cập nhật danh sách bạn bè khi có sự thay đổi về data
     useEffect(() => {
-        if (Array.isArray(data)){
+        if(Array.isArray(data)){
             setAuth(data)
         }
     }, [data])
 
     // Hàm xử lý thay đổi giá trị tìm kiếm
-    const handleChange = (e) =>{
+    const handleChange = (e) => {
         setSearchQuery(e.target.value) 
     }
 
@@ -61,6 +61,7 @@ function NewChat(){
                                             roomName: `${item.lastname} ${item.name}`,
                                             avatar: item.avatar,
                                         }}
+                                        onClick={() => setIsShowNewChat(false)}
                                     >
                                        <img src={`http://localhost:8081/users/${item.avatar}`} alt="Avatar" />
                                        <span>{`${item.lastname} ${item.name}`}</span>

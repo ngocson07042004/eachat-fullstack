@@ -1,7 +1,7 @@
 import AuthProvider, { AuthContext } from './AuthProvider'
 import AppProvider, { AppContext } from './AppProvider'
 
-function Provider({ children }){
+export default function Provider({ children }){
     return(
         <AuthProvider>
             <AppProvider>
@@ -12,4 +12,3 @@ function Provider({ children }){
 }
 
 export { AuthContext, AppContext }
-export default Provider

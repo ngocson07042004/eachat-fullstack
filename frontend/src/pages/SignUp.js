@@ -51,7 +51,7 @@ function SignUp(){
         if (username && password === corfimPassword){
             if(password !== corfimPassword){
                 setToast({
-                    icon: "danger",
+                    icon: "error",
                     title: "Thất bại",
                     message: "Thông tin không chính xác!"
                 })
@@ -86,13 +86,18 @@ function SignUp(){
                     }
                 }
                 catch(err){
-                    console.error(err)
+                    console.log(err)
+                    setToast({
+                        icon: "error",
+                        title: "Lỗi hệ thống",
+                        message: "Không thể kết nối đến máy chủ!",
+                    })
                 }
             }
         }
     }
 
-    return (
+    return(
         <>
             <form onSubmit={handleSubmit}>
                 <div className="form-group-signup">

@@ -9,7 +9,6 @@ const User = {
             if(err) return res.json("Error")
             res.json(data)
         })
-        console.log(username)
     },
 
     login: (req, res) => {

@@ -19,7 +19,12 @@
 }
 
 .chat-window ul li + li{
-    margin-top: 20px;
+    margin-top: 10px;
+}
+
+.chat-window ul li.sender,
+.chat-window ul li.receiver{
+    margin-bottom: 10px;
 }
 
 .chat-window ul li.sender{
@@ -31,6 +36,7 @@
 }
 
 .chat-window ul li.sender .chat{
+    width: 100%;
     display: flex;
     flex-direction: row-reverse;
 }
@@ -69,8 +75,8 @@
 }
 
 .chat-window ul li .chat .info p{
-    width: fit-content;
-    max-width: 80%;
+    width: max-content;
+    max-width: 100%;
     word-wrap: break-word;
     overflow-wrap: break-word;
     padding: 6px;

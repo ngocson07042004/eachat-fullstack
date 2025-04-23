@@ -47,12 +47,11 @@ class Blockchain{
 
     // Kiểm tra các block có hợp lệ
     isChainValid(){
-        for (let i = 1; i < this.chain.length; i++) {
+        for (let i = 1; i < this.chain.length; i++){
             const current = this.chain[i]
             const previous = this.chain[i - 1]
 
-            if (current.hash !== current.calculateHash()) return false
-            if (current.previousHash !== previous.hash) return false
+            if (current.hash !== current.calculateHash() || current.previousHash !== previous.hash) return false
         }
         return true
     }

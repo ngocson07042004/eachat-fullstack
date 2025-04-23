@@ -37,7 +37,7 @@ function Toast({ icon, title, message }){
                     icon:"fa-solid fa-circle-exclamation",
                 }
 
-            case "danger":
+            case "error":
                 return{
                     color: "red",
                     icon: "fa-solid fa-circle-xmark",
